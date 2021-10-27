@@ -1,0 +1,163 @@
+<html>
+    <head>
+      <style>
+        .logoImage{
+          width: 50px;
+        }
+        #form{
+          margin-top: 18%;
+    margin-left: -7%;
+        }
+        .flexLable{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 12px;
+
+        }
+        select{
+          height: 40px;
+        }
+        .flexLable input{
+          height: 40px;
+        }
+
+      </style>
+        <!-- CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+
+<!-- jQuery and JS bundle w/ Popper.js -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="style/style.css">
+                <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin=""/>
+        <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" crossorigin=""></script>
+    
+    </head>
+    <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+<img class="logoImage" src="images/cupcake_icon.png"/>
+  <a class="navbar-brand" href="#">Best Cupcakes</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Contact</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6">
+             
+     <form role="form" id="form">
+      
+      <div class="flexLable">
+      <label for="customer_Name">Customer Name</label>
+<input type="text" name="customer_Name" id="cusName" required>
+</div>
+<!-- ////////// -->
+<div class="flexLable">
+<label for="count">Count</label>
+<input type="number" name="count" id="countCake" required>
+</div>
+<!-- ///////////Strawberry --> 
+<div class="flexLable">
+<label for="typeCake">Type</label>
+<select name="typeCake" id="typeCake" required>
+  <option value="None">None</option>
+  <option value="Chocolate">Chocolate</option>
+  <option value="Lemon">Lemon</option>
+  <option value="Pecan">Pecan</option>
+  <option value="Strawberry">Strawberry</option>
+
+  </select>
+
+</div>
+<!-- //////////// -->
+<div class="flexLable">
+<label for="delivery_Time">Delivery Time :</label>
+<select name="delivery_Time" id="delivery_Time" required>
+<option value="None">None</option>
+<option value="12:00 PM">12:00 PM</option>
+<option value="12:30 PM">12:30 PM</option>
+<option value="1:00 PM">1:00 PM</option>
+<option value="1:30 PM">1:30 PM</option>
+<option value="2:00 PM">2:00 PM</option>
+<option value="2:30 PM">2:30 PM</option>
+<option value="3:00 PM">3:00 PM</option>
+<option value="3:30 PM">3:30 PM</option>
+<option value="4:00 PM">4:00 PM</option>
+</select>
+</div>
+<!-- ///////////// -->
+<div class="flexLable">
+<label for="Allergies">Allergies</label>
+<select name="allergies" id="allergies" required>
+  <option value="None">None</option>
+  <option value="Dairy Free">Dairy Free</option>
+  <option value="Nut Free">Nut Free</option>
+</select>
+</div>
+<!-- ////////// -->
+
+<button id="submitBtn"type="submit">Submit</button>
+
+     </form>
+     </div>
+
+
+
+
+
+
+
+                <div class="col-sm-6">
+                    <span id="welcome" class="welcome">Welcome user</span>
+                    <button onclick="show_storage();" type="button" class="btn btn-info">Show</button>
+                    <div style="text-align:center;padding:1em 0;"> <h3><a style="text-decoration:none;" href="https://www.zeitverschiebung.net/en/city/250441"><span style="color:gray;"><iframe src="https://www.zeitverschiebung.net/clock-widget-iframe-v2?language=en&size=medium&timezone=Asia%2FAmman&show=hour_minute" width="100%" height="115" frameborder="0" seamless></iframe> </div>
+
+                <table class="table">
+                    <thead>
+                    <tr><th>Name</th><th>Type</th><th>Weight</th></tr>
+                    </thead>
+                    <tbody id="cupcake-table">
+                    
+                    </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    
+        
+        
+        
+        
+        <script src="script/script.js"></script>
+
+        
+    </body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</html>
