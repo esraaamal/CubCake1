@@ -31,11 +31,21 @@ function show_cupcakes() {
 let submitBtn=document.getElementById('submitBtn')
 let cusName=document.getElementById('cusName')
 let countCake=document.getElementById('countCake')
+let smallContainer=document.querySelectorAll('small')
+// smallContainer.style.color="red"
+console.log(smallContainer[0].innerText)
 console.log(cusName.value)
 //////select /////////////
 let typeCake=document.getElementById('typeCake')
 let allergies=document.getElementById('allergies')
 let delivery_Time=document.getElementById('delivery_Time')
+//icon Dom//
+let correctGreen=document.querySelectorAll('i.fa-check')
+let wrongRed=document.querySelectorAll('i.fa-exclamation-circle')
+let iconInput=document.querySelectorAll('.iconInput')
+
+
+
 ///////select//////////
 
 let selectType=document.querySelectorAll('select')
@@ -45,49 +55,98 @@ submitBtn.addEventListener('click',validate)
 function validate(e){
     //write code that validates the form
     if(cusName.value.match(check_Name)){
-        cusName.style.border="3px solid #3ff312"
+        iconInput[0].style.border="1px solid #3ff312"
         localStorage.setItem('Customer_Nmae',cusName.value)
+        smallContainer[0].style.color="#3ff312"
+        smallContainer[0].innerText="Okay"
+        wrongRed[0].style.display="none"
+        correctGreen[0].style.display="block"
 
     }
     else{
-        cusName.style.border="3px solid red"
+        wrongRed[0].style.display="block"
+        correctGreen[0].style.display="none"
+        iconInput[0].style.border="1px solid red"
         console.log('at least 5 characters long and at most 16 characters long')
+        smallContainer[0].style.color="red"
+        smallContainer[0].innerText="The name must be between 5 and 16 characters long"
     }
+
+
+
 ////////count validtion/////
 if(countCake.value>=1 &&countCake.value<15){
-    countCake.style.border="3px solid #3ff312"
+    iconInput[1].style.border="1px solid #3ff312"
+    smallContainer[1].style.color="#3ff312"
+    smallContainer[1].innerText="Okay"
+    correctGreen[1].style.display="block"
+    wrongRed[1].style.display="none"
 }
 else{
-   countCake.style.border="3px solid red" 
+    wrongRed[1].style.display="block"
+    correctGreen[1].style.display="none"
+    iconInput[1].style.border="1px solid red"
    console.log('count from 1 to 15 cubcake only')
+   smallContainer[1].style.color="red"
+   smallContainer[1].innerText="The count must be between 1 and 15"
+
+
 }
 
 selectType.forEach(x=>{
-    if(x.value !="None"){
-        x.style.border="3px solid #3ff312"
+    if(x.value =="None" &&x.id=="typeCake"){
+        typeCake.style.border="1px solid red" 
+        smallContainer[2].style.color="red"
+        smallContainer[2].innerText="Please Fill out the CupCake type"
+      
+       
+    }else if(x.value !="None" &&x.id=="typeCake"){
+        typeCake.style.border="1px solid #3ff312"
+        smallContainer[2].style.color="#3ff312"
+        smallContainer[2].innerText="Okey"
+
     }
-    else{
-        x.style.border="3px solid red" 
-        console.log('must choose a type')
+    if(x.value =="None" &&x.id=="delivery_Time"){
+delivery_Time.style.border="1px solid red" 
+        smallContainer[3].style.color="red"
+        smallContainer[3].innerText="Please Fill out the Delivery Time"
     }
+    else if(x.value !="None" &&x.id=="delivery_Time"){
+        delivery_Time.style.border="1px solid #3ff312"
+        smallContainer[3].style.color="#3ff312"
+        smallContainer[3].innerText="Okey"
+
+    }
+  
+    if(x.id=="allergies"){
+        allergies.style.border="1px solid #3ff312"
+                smallContainer[4].style.color="#3ff312"
+                smallContainer[4].innerText="Okey"
+            }
+           
+   
+
 })
 
 if(typeCake.value=="Chocolate" && allergies.value=="Dairy Free"){
-console.log('type of cake is not dairy free')
+    allergies.style.border="1px solid red"
+    smallContainer[4].style.color="red"
+    smallContainer[4].innerText='type of cake is not dairy free'
 
 }
 if(typeCake.value=="Pecan" && allergies.value=="Nut Free"){
-    console.log('type of cake is not dairy free')
+    allergies.style.border="1px solid red"
+    smallContainer[4].style.color="red"
+    smallContainer[4].innerText='type of cake is not Nut Fre'
+ 
 
 }
 if(delivery_Time.value=="4:00 PM" && typeCake.value=="Chocolate"){
-console.log("that this type of cake cannot be delivered at 4 PM.")
+    delivery_Time.style.border="1px solid red"
+    smallContainer[3].style.color="red"
+    smallContainer[3].innerText="that this type of cake cannot be delivered at 4 PM."
+
 }
-
-
-
-
-
 
 
     e.preventDefault()
